@@ -1,0 +1,11 @@
+rubybox:
+  build: .
+  command: bash
+  working_dir: /usr/src/app
+  environment:
+  #  PORT: 8080
+    BUNDLE_PATH: 'vendor/bundle'
+  # ports:
+  #   - '8080:8080'
+  volumes:
+    - '.:/usr/src/app'
