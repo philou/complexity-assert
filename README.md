@@ -1,12 +1,14 @@
-# Rubybox
+# Complexity Regression
 
-A straightforward Ruby development box using docker.
+A utility to assert time complexity of an algorithm in rspec.
 
-To bootstrap a new ruby project, simply clone this repo, build the image, and start on.
+## installation
+
+It uses rubybox, simply clone this repo, build the image, and start on.
 
 ```shell
-git clone git@github.com:philou/rubybox.git my-project
-cd my-project
+git clone ...
+cd ...
 docker-compose build
 docker-compose run rubybox
 ```
