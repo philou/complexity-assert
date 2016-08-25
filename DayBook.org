@@ -1,0 +1,9 @@
+* TODO build an assert for a linear algorithm
+** DONE play with the thing, and print first results
+** TODO deal with warmup
+*** TODO find a way to know if my new algo is better than the previous one
+**** TODO have an arena, it generates validating samples, runs the 2 algos, then compares the distance on validation inputs
+***** DONE compute the rmse
+**** TODO dump csvs to know how the error changes with the algos
+*** TODO detect whether warmup has a consequence
+** TODO package a simple rspec lib
