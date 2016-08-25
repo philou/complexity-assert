@@ -1,4 +1,4 @@
-# Complexity Regression
+# Complexity Assert
 
 A utility to assert time complexity of an algorithm in rspec.
 
