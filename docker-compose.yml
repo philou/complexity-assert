@@ -1,5 +1,5 @@
 rubybox:
-  build: .
+  image: ruby:2.3
   command: bash
   working_dir: /usr/src/app
   environment:
