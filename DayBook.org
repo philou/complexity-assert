@@ -4,6 +4,12 @@
 *** TODO find a way to know if my new algo is better than the previous one
 **** TODO have an arena, it generates validating samples, runs the 2 algos, then compares the distance on validation inputs
 ***** DONE compute the rmse
+***** TODO split the classes to files
+**** What parameters do I already have ?
+***** distribution of input sizes
+***** number of runs
+***** GC or not
+***** warmup or not
 **** TODO dump csvs to know how the error changes with the algos
 *** TODO detect whether warmup has a consequence
 ** TODO package a simple rspec lib
