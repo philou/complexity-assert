@@ -1,15 +1,28 @@
 * TODO build an assert for a linear algorithm
 ** DONE play with the thing, and print first results
-** TODO deal with warmup
-*** TODO find a way to know if my new algo is better than the previous one
-**** TODO have an arena, it generates validating samples, runs the 2 algos, then compares the distance on validation inputs
-***** DONE compute the rmse
-***** TODO split the classes to files
-**** What parameters do I already have ?
-***** distribution of input sizes
-***** number of runs
-***** GC or not
-***** warmup or not
+** DONE O(x) algorithms : do a simple Ordinary Least Squares
+*** DONE disable GC for the moment
+*** TODO deal with warmup
+**** DONE find a way to know if my new algo is better than the previous one
+***** DONE have an arena, it generates validating samples, runs the 2 algos, then compares the distance on validation inputs
+****** DONE compute the rmse
+****** DONE split the classes to files
+***** What parameters do I already have ?
+****** distribution of input sizes
+****** number of runs
+****** GC or not
+****** warmup or not
+**** TODO detect whether warmup has a consequence
+***** It Does. Particularly on small number of runs. 10 runs + 3 warmup rounds gave good results
+***** TODO play with different counts of warmup rounds
 **** TODO dump csvs to know how the error changes with the algos
-*** TODO detect whether warmup has a consequence
-** TODO package a simple rspec lib
+*** TODO write the basic rspec integration
+**** TODO package a simple rspec lib
+**** TODO time the overall execution and make it faster
+** TODO O(1) : identify the flat slope
+** TODO O(x2) : pre-treat with an sqrt before OLS, compare RMSE of both linear and quadratic models to see which one is best
+** TODO Robustness against GC : use gc intensive ruby methods, and see how the regression behaves
+** TODO O(x?) : do some kind of dichotomy or search to find the most probable model
+** TODO O(lnx) : pre-treat with exp()
+** TODO O(?lnx) : use exp, then a search for the coefficient (aka polynomial)
+** TODO O(xlnx) : there is no well known inverse for that, we can compute it numericaly though

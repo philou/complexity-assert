@@ -1,3 +1,5 @@
+
+# Generates a sample of execution timings to compute the RMSE of complexity models, in order to valide them
 class ComplexityValidator
 
   def initialize(sampler, complexity_models)

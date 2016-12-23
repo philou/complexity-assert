@@ -1,3 +1,5 @@
+
+# Performs basic linear regression on a set of points
 class SimpleLinearRegression
   def initialize(xs, ys)
     @xs, @ys = xs, ys
@@ -5,6 +7,8 @@ class SimpleLinearRegression
       raise "Unbalanced data. xs need to be same length as ys"
     end
   end
+
+  # TODO cache all these
 
   def y_intercept
     mean(@ys) - (slope * mean(@xs))

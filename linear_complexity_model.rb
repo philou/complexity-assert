@@ -1,3 +1,5 @@
+
+# Generates a sample of execution timings to run a linear regression in order to predict another execution time
 class LinearComplexityModel
 
   def initialize(sampler, run_count)
