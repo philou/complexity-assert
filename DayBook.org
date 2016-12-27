@@ -2,7 +2,7 @@
 ** DONE play with the thing, and print first results
 ** DONE O(x) algorithms : do a simple Ordinary Least Squares
 *** DONE disable GC for the moment
-*** TODO deal with warmup
+*** DONE deal with warmup
 **** DONE find a way to know if my new algo is better than the previous one
 ***** DONE have an arena, it generates validating samples, runs the 2 algos, then compares the distance on validation inputs
 ****** DONE compute the rmse
@@ -12,14 +12,49 @@
 ****** number of runs
 ****** GC or not
 ****** warmup or not
-**** TODO detect whether warmup has a consequence
-***** It Does. Particularly on small number of runs. 10 runs + 3 warmup rounds gave good results
-***** TODO play with different counts of warmup rounds
-**** TODO dump csvs to know how the error changes with the algos
-*** TODO write the basic rspec integration
-**** TODO package a simple rspec lib
-**** TODO time the overall execution and make it faster
+**** DONE dump csvs to know how the error changes with the algos
+**** DONE detect whether warmup has a consequence
+***** It Does. Particularly on small number of runs.
+***** Even in the same process, we can spot a difference
+***** Once we know if it is important, let's just use it all the time
+***** It might be depending on the algorithm ! the number of time some parts are looped over during the run.
+***** [OK] On our linear search, around 60 warmup rounds are required to reduce variability
+***** DONE play with different counts of warmup rounds
+** TODO Add +2 pomodoro to the task title
 ** TODO O(1) : identify the flat slope
+*** TODO not sure a transformation is possible for a regression, otherwise, just do an average
+*** TODO predict is just returning the average
+*** TODO print and compare the results
+*** TODO try with a constant algorithm to test
+** TODO write the basic rspec integration
+*** DONE define the API we want
+**** class Algorithm; def generate_args(n) ...; def run(args) ...; end;
+**** expect(Algorithm).to be_linear()
+**** expect(Algorithm).to be_constant()
+**** expect(Algorithm).to be_quadratic()
+**** expect(Algorithm).to be_logarithmic()
+**** expect(Algorithm).to be_in(N*LN(N))
+**** expect(Algorithm, warmups: 30, rounds: 20, sizes: [...]).to be_xxx() or expect(Algorithm).to be_xxx(warmups: 30, rounds: 20, sizes: [...])
+*** TODO determine the condition
+**** compare with constant
+***** simple to do ! not sure it works :
+| algorithm | expect constant                                                       | expect linear                         |
+|-----------+-----------------------------------------------------------------------+---------------------------------------|
+| constant  | regress both, find constant is better or linear with very small slope | will find a very small slope          |
+| linear    | should fail                                                           | should pass, but might be quadratic ! |
+***** checking constant is checking that is not worse than constant eg : linear or log
+***** they can all be coded with transformations to the timings
+****** constant : remove the size, keep the timing
+****** linear : identity
+****** logarithmic : some kind of exponential
+****** quadratic : some kind of squar root
+***** TODO need to rule out very small coefs, could find a quadratic with a small coef !
+****** If we had an idea of the max size we would like to use it for, we could check that at that size, coeff is still irrelevant
+****** Compute the error we can expect from our data sample, and use it to determine what is 0 or not
+*** TODO package a simple rspec lib
+*** TODO time the overall execution and make it faster
+**** TODO reuse the same datapoint for all models
+**** TODO cache the linear regression (it's done twice)
 ** TODO O(x2) : pre-treat with an sqrt before OLS, compare RMSE of both linear and quadratic models to see which one is best
 ** TODO Robustness against GC : use gc intensive ruby methods, and see how the regression behaves
 ** TODO O(x?) : do some kind of dichotomy or search to find the most probable model

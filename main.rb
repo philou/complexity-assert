@@ -27,8 +27,9 @@ linear_search = LinearSearch.new
 sampler = Sampler.new(linear_search)
 complexity_models = [1,10,100].flat_map do |run_count|
   [
-    LinearComplexityModel.new(sampler, run_count),
-    LinearComplexityModel.new(WarmupSampler.new(sampler), run_count)
+    LinearComplexityModel.new(WarmupSampler.new(sampler,60), run_count),
+    LinearComplexityModel.new(WarmupSampler.new(sampler,60), run_count),
+    LinearComplexityModel.new(WarmupSampler.new(sampler,60), run_count)
   ]
 end
 

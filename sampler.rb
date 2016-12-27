@@ -5,14 +5,14 @@ class Sampler
 
   # Generates an array of sample data points
   # [ [input size, real time], ... ]
-  def run(sizes, count)
-    sizes.flat_map { |size | run_for_size(size, count) }
+  def run(sizes, rounds)
+    sizes.flat_map { |size | run_for_size(size, rounds) }
   end
 
   private
 
-  def run_for_size(size, count)
-    Array.new(count) do
+  def run_for_size(size, rounds)
+    Array.new(rounds) do
       args = @algo_under_test.generate_args(size)
       GC.disable
       real_time = Benchmark.realtime { @algo_under_test.run(*args) }
