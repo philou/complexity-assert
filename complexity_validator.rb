@@ -11,9 +11,10 @@ class ComplexityValidator
     data = @sampler.run([8,10,12,80,100,120,800,1000,1200],10)
 
     @complexity_models.map do |model|
-      Math.sqrt(data.map { |size, real_time|
-                  (real_time - model.predict_run_time(size))**2
-                }.reduce &:+)
+      rmse = Math.sqrt(data.map { |size, real_time|
+                         (real_time - model.predict_run_time(size))**2
+                       }.reduce &:+)
+      [ model.to_s, rmse]
     end
   end
 

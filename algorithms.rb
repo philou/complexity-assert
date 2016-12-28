@@ -31,3 +31,22 @@ class Random5
     array[0...5]
   end
 end
+
+class Pairs
+
+  def generate_args(size)
+    [ Array.new(size) { rand(1..size) } ]
+  end
+
+  def run(array)
+    pairs = 0
+    array.each_index do |i|
+      (i+1...array.size).each do |j|
+        if i == j
+          pairs += 1
+        end
+      end
+    end
+    pairs
+  end
+end

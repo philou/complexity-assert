@@ -10,4 +10,8 @@ class ConstantComplexityModel
     @average
   end
 
+  def to_s
+    'O(1)'
+  end
+
 end

@@ -1,4 +1,3 @@
-
 # Generates a sample of execution timings to run a linear regression in order to predict another execution time
 class LinearComplexityModel
 
@@ -10,6 +9,10 @@ class LinearComplexityModel
 
   def predict_run_time(input_data_size)
     @y_intercept + @slope * input_data_size
+  end
+
+  def to_s
+    "O(n)"
   end
 
 end

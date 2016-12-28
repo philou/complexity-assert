@@ -20,7 +20,6 @@
 ***** It might be depending on the algorithm ! the number of time some parts are looped over during the run.
 ***** [OK] On our linear search, around 60 warmup rounds are required to reduce variability
 ***** DONE play with different counts of warmup rounds
-** TODO Add +4 pomodoro to the task title
 ** DONE O(1) : identify the flat slope
 *** DONE not sure a transformation is possible for a regression, otherwise, just do an average
 *** DONE predict is just returning the average
@@ -44,7 +43,18 @@
 **** We can give benefit of the doubt to the simpler model.
 **** The more complex model needs to give an RMSE half the one of the simpler model to be selected
 **** This works well on practice with Random5 and LinearSearch
-** TODO O(x2) : pre-treat with an sqrt before OLS, compare RMSE of both linear and quadratic models to see which one is best
+** DONE O(x2) : pre-treat with an sqrt before OLS, compare RMSE of both linear and quadratic models to see which one is best
+*** DONE write a quadratic algorithm
+*** DONE add QuadraticComplexityModel
+**** A = Qn2 + C
+**** reg : sqrt(A) = Ln + D
+**** reg : A = L2n2 + 2LDn + D2
+*** DONE select the best and see if it works
+**** Needs to be twice as better as the next one !
+**** have all rmse in order of complexity (constant, linear, quadratic, etc)
+**** go through all starting from the first. Keep the min rmse
+**** if a new rmse is found smaller than half the min, we'll pick this one
+*** Sometimes, if finds O(n) instead of O(n²). Maybe that's not so much of an issue if the assertion checks that it's at worst O(n²)
 ** TODO write the basic rspec integration
 *** DONE define the API we want
 **** class Algorithm; def generate_args(n) ...; def run(args) ...; end;
@@ -54,7 +64,7 @@
 **** expect(Algorithm).to be_logarithmic()
 **** expect(Algorithm).to be_in(N*LN(N))
 **** expect(Algorithm, warmups: 30, rounds: 20, sizes: [...]).to be_xxx() or expect(Algorithm).to be_xxx(warmups: 30, rounds: 20, sizes: [...])
-*** TODO determine the condition
+*** DONE determine the condition
 **** compare with constant
 ***** simple to do ! not sure it works :
 | algorithm | expect constant                                                       | expect linear                         |
@@ -67,11 +77,16 @@
 ****** linear : identity
 ****** logarithmic : some kind of exponential
 ****** quadratic : some kind of squar root
+**** We just need to assert that it's at worst O(something).
 *** TODO package a simple rspec lib
+**** Get an internet access
+**** download rspec
+**** see how to create matchers with rspec3
 *** TODO time the overall execution and make it faster
-**** TODO reuse the same datapoint for all models
+**** DONE reuse the same datapoint for all models
 **** TODO cache the linear regression (it's done twice)
 *** TODO factorize / find a way to better generate the sizes
+** TODO Add +6 pomodoro to the task title
 ** TODO Robustness against GC : use gc intensive ruby methods, and see how the regression behaves
 ** TODO O(x?) : do some kind of dichotomy or search to find the most probable model
 ** TODO O(lnx) : pre-treat with exp()
