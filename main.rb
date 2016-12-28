@@ -3,37 +3,19 @@ require_relative 'simple_linear_regression'
 require_relative 'sampler'
 require_relative 'warmup_sampler'
 require_relative 'linear_complexity_model'
+require_relative 'constant_complexity_model'
 require_relative 'complexity_validator'
+require_relative 'algorithms'
 
-# a known linear algorithm to be benchmarked
-class LinearSearch
+algo = Random5.new
+sampler = WarmupSampler.new(Sampler.new(algo),60)
+timings = sampler.run([8,10,12,80,100,120,800,1000,1200], 10)
+complexity_models = [
+  LinearComplexityModel.new(),
+  ConstantComplexityModel.new()
+]
 
-  def generate_args(size)
-    [ Array.new(size) { rand(1..size) }, rand(1..size) ]
-  end
-
-  def run(array, searched)
-    found = false;
-    array.each do |element|
-      if element == array
-        found = true
-      end
-    end
-    found
-  end
-end
-
-linear_search = LinearSearch.new
-sampler = Sampler.new(linear_search)
-complexity_models = [1,10,100].flat_map do |run_count|
-  [
-    LinearComplexityModel.new(WarmupSampler.new(sampler,60), run_count),
-    LinearComplexityModel.new(WarmupSampler.new(sampler,60), run_count),
-    LinearComplexityModel.new(WarmupSampler.new(sampler,60), run_count)
-  ]
-end
-
-complexity_models.each { |model| model.analyze() }
+complexity_models.each { |model| model.analyze(timings) }
 validator = ComplexityValidator.new(sampler, complexity_models)
 
 rmses = validator.rmses
@@ -41,4 +23,13 @@ min_rmse = rmses.min
 rmses_ratios = rmses.map {|rmse| (rmse / min_rmse).round(1) }
 #puts "#{rmses_ratios}"
 
-puts rmses.join(",")
+#puts rmses.join(",")
+
+l_err, c_err = rmses
+best = if l_err < c_err / 2
+         'linear'
+       else
+         'constant'
+       end
+
+puts "#{l_err}, #{c_err}, #{best}"

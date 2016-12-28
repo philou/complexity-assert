@@ -20,12 +20,31 @@
 ***** It might be depending on the algorithm ! the number of time some parts are looped over during the run.
 ***** [OK] On our linear search, around 60 warmup rounds are required to reduce variability
 ***** DONE play with different counts of warmup rounds
-** TODO Add +2 pomodoro to the task title
-** TODO O(1) : identify the flat slope
-*** TODO not sure a transformation is possible for a regression, otherwise, just do an average
-*** TODO predict is just returning the average
-*** TODO print and compare the results
-*** TODO try with a constant algorithm to test
+** TODO Add +4 pomodoro to the task title
+** DONE O(1) : identify the flat slope
+*** DONE not sure a transformation is possible for a regression, otherwise, just do an average
+*** DONE predict is just returning the average
+*** DONE print and compare the results
+*** DONE try with a constant algorithm to test
+** DONE need to rule out very small coefs, could find a quadratic with a small coef !
+*** 12 times on 55, found linear better than constant, only finds constant 80% of times
+*** to compare RMSE corretly, they shouls be normalized, or using the same data points
+*** DONE reuse the same data for training and validation
+*** If we had an idea of the max size we would like to use it for, we could check that at that size, coeff is still irrelevant
+| algo          | slope | y intercept | at 1000 |
+|---------------+-------+-------------+---------|
+| random 5      | E-10  | E-6         | +10%    |
+| linear search | E-7   | E-7         | *1000   |
+*** Compute the error we can expect from our data sample, and use it to determine what is 0 or not
+**** Don't know how to do it !
+**** One thing is that negative slopes are zero !
+*** See how it goes with quadratic
+*** Could we use special assertion be_constant(within: constraints)
+*** It's a case of overfitting in fact !
+**** We can give benefit of the doubt to the simpler model.
+**** The more complex model needs to give an RMSE half the one of the simpler model to be selected
+**** This works well on practice with Random5 and LinearSearch
+** TODO O(x2) : pre-treat with an sqrt before OLS, compare RMSE of both linear and quadratic models to see which one is best
 ** TODO write the basic rspec integration
 *** DONE define the API we want
 **** class Algorithm; def generate_args(n) ...; def run(args) ...; end;
@@ -48,14 +67,11 @@
 ****** linear : identity
 ****** logarithmic : some kind of exponential
 ****** quadratic : some kind of squar root
-***** TODO need to rule out very small coefs, could find a quadratic with a small coef !
-****** If we had an idea of the max size we would like to use it for, we could check that at that size, coeff is still irrelevant
-****** Compute the error we can expect from our data sample, and use it to determine what is 0 or not
 *** TODO package a simple rspec lib
 *** TODO time the overall execution and make it faster
 **** TODO reuse the same datapoint for all models
 **** TODO cache the linear regression (it's done twice)
-** TODO O(x2) : pre-treat with an sqrt before OLS, compare RMSE of both linear and quadratic models to see which one is best
+*** TODO factorize / find a way to better generate the sizes
 ** TODO Robustness against GC : use gc intensive ruby methods, and see how the regression behaves
 ** TODO O(x?) : do some kind of dichotomy or search to find the most probable model
 ** TODO O(lnx) : pre-treat with exp()
