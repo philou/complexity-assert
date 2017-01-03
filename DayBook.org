@@ -84,8 +84,9 @@
 *** DONE Check that the gem is well formed
 *** DONE download rspec
 *** DONE move the files around
-*** TODO write a few specs to make sure it works
-*** TODO see how to create matchers with rspec3
-*** TODO add a module
+*** DONE write a few specs to make sure it works
+*** DONE see how to create matchers with rspec3
+*** TODO move the matchers to the lib
+*** TODO add a module namespace
 *** TODO add travis
 *** TODO add code climate

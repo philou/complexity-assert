@@ -49,7 +49,6 @@ describe "Linear search" do
 
     it "performs linearly" do
         expect(LinearSearch.new).to be_linear()
-        expect(LinearSearch.new).not_to be_quadratic()
     end
 
 end
@@ -61,7 +60,9 @@ There are currently 3 matchers :
 * be_linear
 * be_quadratic
 
-More could be added in the future. Every matcher passes if a faster complexity is identified (`be_linear` will pass if the algorithm is detected to be constant). That means that for the moment, `be_quadratic` always passes, and only makes sense to be used with `expect(...).not_to`.
+More could be added in the future. Every matcher passes if a faster complexity is identified (`be_linear` willalso pass if the algorithm is detected to be constant).
+
+That means that for the moment, `be_quadratic` always passes, but might turn out useful when we add more complex models (Internally, it is quite useful, as it is used to identify that something is more linear than quadratic !).
 
 ## Development
 
