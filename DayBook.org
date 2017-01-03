@@ -55,6 +55,7 @@
 **** go through all starting from the first. Keep the min rmse
 **** if a new rmse is found smaller than half the min, we'll pick this one
 *** Sometimes, if finds O(n) instead of O(n²). Maybe that's not so much of an issue if the assertion checks that it's at worst O(n²)
+** DONE Add +6 pomodoro to the task title
 ** TODO write the basic rspec integration
 *** DONE define the API we want
 **** class Algorithm; def generate_args(n) ...; def run(args) ...; end;
@@ -78,17 +79,12 @@
 ****** logarithmic : some kind of exponential
 ****** quadratic : some kind of squar root
 **** We just need to assert that it's at worst O(something).
-*** TODO package a simple rspec lib
-**** Get an internet access
-**** download rspec
-**** see how to create matchers with rspec3
-*** TODO time the overall execution and make it faster
-**** DONE reuse the same datapoint for all models
-**** TODO cache the linear regression (it's done twice)
-*** TODO factorize / find a way to better generate the sizes
-** TODO Add +6 pomodoro to the task title
-** TODO Robustness against GC : use gc intensive ruby methods, and see how the regression behaves
-** TODO O(x?) : do some kind of dichotomy or search to find the most probable model
-** TODO O(lnx) : pre-treat with exp()
-** TODO O(?lnx) : use exp, then a search for the coefficient (aka polynomial)
-** TODO O(xlnx) : there is no well known inverse for that, we can compute it numericaly though
+*** DONE Get an internet access
+*** TODO fill the readme
+*** TODO Check that the gem is well formed
+*** TODO download rspec
+*** TODO see how to create matchers with rspec3
+*** TODO move the files around
+*** TODO write a few specs to make sure it works
+*** TODO add travis
+*** TODO add code climate
