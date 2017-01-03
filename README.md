@@ -92,6 +92,7 @@ Here is a quick and uncomplete list of things that could improve this library :
 * O(?lnx) : use exp, then a search for the coefficient (aka polynomial)
 * O(xlnx) : there is no well known inverse for that, we can compute it numericaly though
 * O(x?) : do some kind of dichotomy or search to find the most probable model
+* Estimate how much the assert is deterministic
 * ...
 
 As I said, this is still experimental ! Any help is welcome !

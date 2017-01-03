@@ -1,3 +1,5 @@
+require "benchmark"
+
 class Sampler
   def initialize(algo_under_test)
     @algo_under_test = algo_under_test

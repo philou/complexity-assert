@@ -80,11 +80,12 @@
 ****** quadratic : some kind of squar root
 **** We just need to assert that it's at worst O(something).
 *** DONE Get an internet access
-*** TODO fill the readme
-*** TODO Check that the gem is well formed
-*** TODO download rspec
-*** TODO see how to create matchers with rspec3
-*** TODO move the files around
+*** DONE fill the readme
+*** DONE Check that the gem is well formed
+*** DONE download rspec
+*** DONE move the files around
 *** TODO write a few specs to make sure it works
+*** TODO see how to create matchers with rspec3
+*** TODO add a module
 *** TODO add travis
 *** TODO add code climate
