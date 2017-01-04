@@ -85,7 +85,7 @@
 *** DONE move the files around
 *** DONE write a few specs to make sure it works
 *** DONE see how to create matchers with rspec3
-*** TODO move the matchers to the lib
+*** DONE move the matchers to the lib
 *** TODO add a module namespace
 *** TODO add travis
 ** TODO Add +7 pomodoro to the task title
