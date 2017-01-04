@@ -85,6 +85,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 
 Here is a quick and uncomplete list of things that could improve this library :
 
+* Add Code Climate
+* Refactor some code around the matchers
 * Cache the linear regression (it's done twice)
 * Factorize / find a way to better generate the sizes, or allow the assertion to specify the sizes
 * Allow the assertion to specify the warmup and run rounds

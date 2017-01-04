@@ -55,7 +55,6 @@
 **** go through all starting from the first. Keep the min rmse
 **** if a new rmse is found smaller than half the min, we'll pick this one
 *** Sometimes, if finds O(n) instead of O(n²). Maybe that's not so much of an issue if the assertion checks that it's at worst O(n²)
-** DONE Add +6 pomodoro to the task title
 ** TODO write the basic rspec integration
 *** DONE define the API we want
 **** class Algorithm; def generate_args(n) ...; def run(args) ...; end;
@@ -89,4 +88,4 @@
 *** TODO move the matchers to the lib
 *** TODO add a module namespace
 *** TODO add travis
-*** TODO add code climate
+** TODO Add +7 pomodoro to the task title

@@ -7,6 +7,7 @@ require "complexity_assert/quadratic_complexity_model"
 require "complexity_assert/sampler"
 require "complexity_assert/simple_linear_regression"
 require "complexity_assert/warmup_sampler"
+require "complexity_assert/matchers"
 
 module ComplexityAssert
   # Your code goes here...
