@@ -1,6 +1,6 @@
 # ComplexityAssert
 
-They are some performance critical pieces of code that will be executed on huge data sets, which we want to make sure will run fast enough. Unfortunately, enforcing this is not easy, often requiring large scale and slow benchmarks. This rspec library (the result of an experiment to learn machine learning) uses linear regression to determine the time complexity (Big O notation, O(x)) of a piece of code and to check that it is at least as good as what we expect. This does not require huge data sets (only a few large ones) and can be written as any unit test (not as fast though).
+They are some performance critical pieces of code that will be executed on huge data sets, which we want to make sure will run fast enough. Unfortunately, enforcing this is not easy, often requiring large scale and slow benchmarks. This [RSpec](http://rspec.info/) library (the result of an experiment to learn machine learning) uses linear regression to determine the time complexity ([Big O notation](http://bigocheatsheet.com/), O(x)) of a piece of code and to check that it is at least as good as what we expect. This does not require huge data sets (only a few large ones) and can be written as any unit test (not as fast though).
 
 ## Installation
 
@@ -28,12 +28,15 @@ In order to test the complexity of an algorithm, you need to provide 2 things :
 For this, you need to provide an object that answers to messages `generate_args` and `run`. Here is an example
 
 ``` ruby
+# An adapter class to fit the code to measure in complexity assert
 class LinearSearch
 
+  # Generate some arguments of a particular size
   def generate_args(size)
     [ Array.new(size) { rand(1..size) }, rand(1..size) ]
   end
 
+  # Run the code on which we want to assert performance
   def run(array, searched)
     found = false;
     array.each do |element|
@@ -47,9 +50,10 @@ end
 
 describe "Linear search" do
 
-    it "performs linearly" do
-        expect(LinearSearch.new).to be_linear()
-    end
+  it "performs linearly" do
+    # Verify that the code runs in time proportional to the size of its arguments
+    expect(LinearSearch.new).to be_linear()
+  end
 
 end
 ```

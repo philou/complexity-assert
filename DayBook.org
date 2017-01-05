@@ -1,4 +1,4 @@
-* TODO build an assert for a linear algorithm
+* DONE build an assert for a linear algorithm
 ** DONE play with the thing, and print first results
 ** DONE O(x) algorithms : do a simple Ordinary Least Squares
 *** DONE disable GC for the moment
@@ -55,7 +55,8 @@
 **** go through all starting from the first. Keep the min rmse
 **** if a new rmse is found smaller than half the min, we'll pick this one
 *** Sometimes, if finds O(n) instead of O(n²). Maybe that's not so much of an issue if the assertion checks that it's at worst O(n²)
-** TODO write the basic rspec integration
+** DONE Add +7 pomodoro to the task title
+** DONE write the basic rspec integration
 *** DONE define the API we want
 **** class Algorithm; def generate_args(n) ...; def run(args) ...; end;
 **** expect(Algorithm).to be_linear()
@@ -86,6 +87,6 @@
 *** DONE write a few specs to make sure it works
 *** DONE see how to create matchers with rspec3
 *** DONE move the matchers to the lib
-*** TODO add a module namespace
-*** TODO add travis
-** TODO Add +7 pomodoro to the task title
+*** DONE add a module namespace
+*** DONE add travis
+*** DONE just submit
