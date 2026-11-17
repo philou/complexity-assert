@@ -5,10 +5,12 @@ class LinearSearch
     [ Array.new(size) { rand(1..size) }, rand(1..size) ]
   end
 
+  # Note that we deliberately scan the whole array instead of returning early,
+  # so that the duration only depends on the size of the input
   def run(array, searched)
     found = false;
     array.each do |element|
-      if element == array
+      if element == searched
         found = true
       end
     end
@@ -16,7 +18,7 @@ class LinearSearch
   end
 end
 
-# a constant linear algorithm to be benchmarked
+# a known constant algorithm to be benchmarked
 class Random5
 
   def generate_args(size)
@@ -32,6 +34,7 @@ class Random5
   end
 end
 
+# a known quadratic algorithm to be benchmarked, it counts the pairs of equal elements
 class Pairs
 
   def generate_args(size)
@@ -42,7 +45,7 @@ class Pairs
     pairs = 0
     array.each_index do |i|
       (i+1...array.size).each do |j|
-        if i == j
+        if array[i] == array[j]
           pairs += 1
         end
       end

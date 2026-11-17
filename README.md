@@ -42,7 +42,7 @@ class LinearSearch
   def run(array, searched)
     found = false;
     array.each do |element|
-      if element == array
+      if element == searched
         found = true
       end
     end
