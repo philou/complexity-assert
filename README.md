@@ -1,6 +1,8 @@
 # ComplexityAssert
 
-They are some performance critical pieces of code that will be executed on huge data sets, which we want to make sure will run fast enough. Unfortunately, enforcing this is not easy, often requiring large scale and slow benchmarks. This [RSpec](http://rspec.info/) library (the result of an experiment to learn machine learning) uses linear regression to determine the time complexity ([Big O notation](http://bigocheatsheet.com/), O(x)) of a piece of code and to check that it is at least as good as what we expect. This does not require huge data sets (only a few large ones) and can be written as any unit test (not as fast though).
+They are some performance critical pieces of code that will be executed on huge data sets, which we want to make sure will run fast enough. Unfortunately, enforcing this is not easy, often requiring large scale and slow benchmarks. This library (the result of an experiment to learn machine learning) uses linear regression to determine the time complexity ([Big O notation](http://bigocheatsheet.com/), O(x)) of a piece of code and to check that it is at least as good as what we expect. This does not require huge data sets (only a few large ones) and can be written as any unit test (not as fast though).
+
+It works with both [RSpec](http://rspec.info/) and [Minitest](https://github.com/minitest/minitest). Neither is a dependency of the gem: it only hooks into the test framework you already load.
 
 ## Installation
 
@@ -47,12 +49,18 @@ class LinearSearch
     found
   end
 end
+```
+
+### With RSpec
+
+```ruby
+require 'complexity_assert'
 
 describe "Linear search" do
 
   it "performs linearly" do
     # Verify that the code runs in time proportional to the size of its arguments
-    expect(LinearSearch.new).to be_linear()
+    expect(LinearSearch.new).to be_linear
   end
 
 end
@@ -60,13 +68,60 @@ end
 
 There are currently 3 matchers :
 
-* be_constant
-* be_linear
-* be_quadratic
+* `be_constant`
+* `be_linear`
+* `be_quadratic`
 
-More could be added in the future. Every matcher passes if a faster complexity is identified (`be_linear` willalso pass if the algorithm is detected to be constant).
+### With Minitest
 
-That means that for the moment, `be_quadratic` always passes, but might turn out useful when we add more complex models (Internally, it is quite useful, as it is used to identify that something is more linear than quadratic !).
+```ruby
+require 'complexity_assert/minitest'
+
+class LinearSearchTest < Minitest::Test
+
+  def test_it_performs_linearly
+    # Verify that the code runs in time proportional to the size of its arguments
+    assert_linear_complexity LinearSearch.new
+  end
+
+end
+```
+
+There are currently 3 assertions, with their `refute_` counterparts :
+
+* `assert_constant_complexity` / `refute_constant_complexity`
+* `assert_linear_complexity` / `refute_linear_complexity`
+* `assert_quadratic_complexity` / `refute_quadratic_complexity`
+
+All of them accept an optional custom failure message as a second argument, as any Minitest assertion :
+
+```ruby
+assert_constant_complexity Lookup.new, 'a lookup should not depend on the size of the index'
+```
+
+There is also a lower level `assert_complexity_at_most` (and `refute_complexity_at_most`), which takes the big O notation directly :
+
+```ruby
+assert_complexity_at_most 'O(n)', LinearSearch.new
+```
+
+If your test helper already requires `minitest/autorun` (or `rspec`) before `complexity_assert`, a plain `require 'complexity_assert'` detects the framework and installs the matching integration on its own.
+
+### Without a test framework
+
+The identification itself is framework agnostic, and returns a big O notation :
+
+```ruby
+require 'complexity_assert'
+
+ComplexityAssert.identify_complexity(LinearSearch.new)  # => "O(n)"
+```
+
+### Notes on the expectations
+
+More complexities could be added in the future. Every matcher and assertion passes if a faster complexity is identified (`be_linear` / `assert_linear_complexity` will also pass if the algorithm is detected to be constant).
+
+That means that for the moment, `be_quadratic` / `assert_quadratic_complexity` always passes, but might turn out useful when we add more complex models (Internally, it is quite useful, as it is used to identify that something is more linear than quadratic !).
 
 ## Development
 
@@ -79,18 +134,17 @@ docker-compose build
 docker-compose run rubybox
 ```
 
-From then on, you're inside the ruby box, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+From then on, you're inside the ruby box, run `bin/setup` to install dependencies. Then, run `rake` to run both test suites (`rake spec` for the RSpec ones, `rake test` for the Minitest ones). You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/complexity_assert.
+Bug reports and pull requests are welcome on GitHub at https://github.com/philou/complexity-assert.
 
 Here is a quick and uncomplete list of things that could improve this library :
 
 * Add Code Climate
-* Refactor some code around the matchers
 * Cache the linear regression (it's done twice)
 * Factorize / find a way to better generate the sizes, or allow the assertion to specify the sizes
 * Allow the assertion to specify the warmup and run rounds

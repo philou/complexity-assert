@@ -1,14 +1,7 @@
-require "complexity_assert/version"
+require "complexity_assert/core"
 
-require "complexity_assert/complexity_validator"
-require "complexity_assert/constant_complexity_model"
-require "complexity_assert/linear_complexity_model"
-require "complexity_assert/quadratic_complexity_model"
-require "complexity_assert/sampler"
-require "complexity_assert/simple_linear_regression"
-require "complexity_assert/warmup_sampler"
-require "complexity_assert/matchers"
-
-module ComplexityAssert
-  # Your code goes here...
-end
+# The test framework integrations are optional: only hook into the framework
+# that is already loaded. Require 'complexity_assert/matchers' or
+# 'complexity_assert/minitest' explicitly to force one of them.
+require "complexity_assert/matchers" if defined?(::RSpec)
+require "complexity_assert/minitest" if defined?(::Minitest)

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-require_relative 'algorithms'
+require_relative '../examples/algorithms'
 
 describe ComplexityAssert do
   it 'has a version number' do
